@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+        }
+        button {
+            background-color: #ff0000;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Shopping Cart</h1>
+        <ul id="cart">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <h2>Add a Book</h2>
+        <div>
+            <label for="bookTitle">Title:</label>
+            <input type="text" id="bookTitle">
+        </div>
+        <div>
+            <label for="bookPrice">Price:</label>
+            <input type="number" id="bookPrice">
+        </div>
+        <button onclick="addToCart()">Add to Cart</button>
+    </div>
+
+    <script>
+        // Sample book data
+        const books = [
+            { id: 1, title: 'Book 1', price: 10 },
+            { id: 2, title: 'Book 2', price: 15 },
+            { id: 3, title: 'Book 3', price: 20 },
+        ];
+
+        const cart = [];
+
+        // Function to display the cart
+        function displayCart() {
+            const cartList = document.getElementById('cart');
+            cartList.innerHTML = '';
+
+            cart.forEach((item) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <span>${item.title} - $${item.price}</span>
+                    <button onclick="removeFromCart(${item.id})">Remove</button>
+                `;
+                cartList.appendChild(listItem);
+            });
+        }
+
+        // Function to add a book to the cart
+        function addToCart() {
+            const title = document.getElementById('bookTitle').value;
+            const price = parseFloat(document.getElementById('bookPrice').value);
+
+            if (title && !isNaN(price)) {
+                const book = {
+                    id: new Date().getTime(), // Unique ID (in a real app, this should come from a server)
+                    title,
+                    price,
+                };
+                cart.push(book);
+                displayCart();
+                document.getElementById('bookTitle').value = '';
+                document.getElementById('bookPrice').value = '';
+            }
+        }
+
+        // Function to remove a book from the cart
+        function removeFromCart(id) {
+            const index = cart.findIndex((item) => item.id === id);
+            if (index !== -1) {
+                cart.splice(index, 1);
+                displayCart();
+            }
+        }
+
+        // Initialize the cart display
+        displayCart();
+    </script>
+</body>
+</html>
