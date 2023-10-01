@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>assignment-4</title>
+    <style>
+        .ij{
+            background-color: aquamarine;
+            padding: 50px;
+            width: 200px;
+            align-items: center;
+
+        }
+        img{
+            width: 50%;
+            height: 50%;
+        }
+        
+    </style>
+</head>
+<body style="text-align: center;">
+    <main>
+<section>
+        <h1 style="text-align: center; color: rgb(241, 152, 20);">Changing the background color </h1>
+    <select onchange="color(this.value)">
+       <option value="">Color</option>
+       <option value="blueviolet">Blueviolet</option>
+       <option value="green">Green</option>
+    </select>
+    </section>
+    
+  <section>
+    <h1><strong>changing image</strong></h1>
+    <img src="2.jpg" alt="2car" id="image"><br>
+    <button onclick="changeImage('3.jpg')">image 1</button><br><br>
+    <input type="text" id="string" value="Enter string">
+
+
+  </section>
+ 
+    </main>
+    
+     <!-- #region json files-->
+    <script>
+        function color(value){
+            document.body.style.backgroundColor=value;
+        }
+        function changeImage(value){
+            let img=document.querySelector("#image")
+            img.setAttribute("src",value);
+
+        }
+    </script>
+    
+</body>
+</html>
